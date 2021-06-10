@@ -23,6 +23,10 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  flutter_screen_recording:
+  permission_handler:
+  open_file:
+  quiver:
 
 
   # The following adds the Cupertino Icons font to your application.
