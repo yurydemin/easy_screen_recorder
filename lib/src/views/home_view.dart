@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screen_recording/flutter_screen_recording.dart';
 import 'package:open_file/open_file.dart';
+import 'package:permission_handler/permission_handler.dart';
 
 class HomeView extends StatefulWidget {
   @override
@@ -9,6 +10,23 @@ class HomeView extends StatefulWidget {
 
 class _HomeViewState extends State<HomeView> {
   bool recording = false;
+
+  requestPermissions() async {
+    Map<Permission, PermissionStatus> statuses = await [
+      Permission.storage,
+      Permission.photos,
+      Permission.microphone,
+      Permission.mediaLibrary,
+    ].request();
+    print(statuses);
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    requestPermissions();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
