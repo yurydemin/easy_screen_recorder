@@ -30,67 +30,67 @@ class _HomeViewState extends State<HomeView> {
     requestPermissions();
   }
 
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      home: Scaffold(
-        appBar: AppBar(
-          title: const Text('Foreground Service Example'),
-        ),
-        body: Center(
-          child: Column(
-            children: <Widget>[
-              ElevatedButton(
-                child: Text("START"),
-                onPressed: () {
-                  startForegroundService();
-                },
-              ),
-              ElevatedButton(
-                child: Text("STOP"),
-                onPressed: () async {
-                  await FlutterForegroundPlugin.stopForegroundService();
-                },
-              ),
-              ElevatedButton(
-                child: Text("Force Crash"),
-                onPressed: () {
-                  exit(1);
-                },
-              )
-            ],
-          ),
-        ),
-      ),
-    );
-  }
-
   // @override
   // Widget build(BuildContext context) {
-  //   return Scaffold(
-  //     appBar: AppBar(
-  //       title: const Text('Flutter Screen Recording'),
-  //     ),
-  //     body: Column(
-  //       mainAxisAlignment: MainAxisAlignment.center,
-  //       children: <Widget>[
-  //         !recording
-  //             ? Center(
-  //                 child: ElevatedButton(
-  //                   child: Text("Record Screen"),
-  //                   onPressed: () => startScreenRecord(false),
-  //                 ),
-  //               )
-  //             : Center(
-  //                 child: ElevatedButton(
-  //                   child: Text("Stop Record"),
-  //                   onPressed: () => stopScreenRecord(),
-  //                 ),
-  //               )
-  //       ],
+  //   return MaterialApp(
+  //     home: Scaffold(
+  //       appBar: AppBar(
+  //         title: const Text('Foreground Service Example'),
+  //       ),
+  //       body: Center(
+  //         child: Column(
+  //           children: <Widget>[
+  //             ElevatedButton(
+  //               child: Text("START"),
+  //               onPressed: () {
+  //                 startForegroundService();
+  //               },
+  //             ),
+  //             ElevatedButton(
+  //               child: Text("STOP"),
+  //               onPressed: () async {
+  //                 await FlutterForegroundPlugin.stopForegroundService();
+  //               },
+  //             ),
+  //             ElevatedButton(
+  //               child: Text("Force Crash"),
+  //               onPressed: () {
+  //                 exit(1);
+  //               },
+  //             )
+  //           ],
+  //         ),
+  //       ),
   //     ),
   //   );
   // }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('Flutter Screen Recording'),
+      ),
+      body: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: <Widget>[
+          !recording
+              ? Center(
+                  child: ElevatedButton(
+                    child: Text("Record Screen"),
+                    onPressed: () => startScreenRecord(false),
+                  ),
+                )
+              : Center(
+                  child: ElevatedButton(
+                    child: Text("Stop Record"),
+                    onPressed: () => stopScreenRecord(),
+                  ),
+                )
+        ],
+      ),
+    );
+  }
 
   void startForegroundService() async {
     await FlutterForegroundPlugin.setServiceMethodInterval(seconds: 5);
