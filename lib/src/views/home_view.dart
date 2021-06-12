@@ -120,7 +120,8 @@ class _HomeViewState extends State<HomeView> {
     start = await FlutterScreenRecording.startRecordScreen(
         DateTime.now().toIso8601String(),
         titleNotification: "STARTED",
-        messageNotification: "MESSAGE");
+        messageNotification: "MESSAGE",
+        iconNotification: "ic_stat_hot_tub");
 
     if (start) {
       setState(() => recording = !recording);
