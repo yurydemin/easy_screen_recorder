@@ -58,8 +58,10 @@ class _HomeViewState extends State<HomeView> {
     bool start = false;
     await Future.delayed(const Duration(milliseconds: 1000));
 
-    start = await FlutterScreenRecording.startRecordScreen("Title",
-        titleNotification: "dsffad", messageNotification: "sdffd");
+    start = await FlutterScreenRecording.startRecordScreen(
+        DateTime.now().toIso8601String(),
+        titleNotification: "STARTED",
+        messageNotification: "MESSAGE");
 
     if (start) {
       setState(() => recording = !recording);
