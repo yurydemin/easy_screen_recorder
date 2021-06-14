@@ -11,6 +11,9 @@ class _EasyScreenRecorderAppState extends State<EasyScreenRecorderApp> {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
+      theme: ThemeData(
+        primarySwatch: Colors.lightGreen,
+      ),
       home: HomeView(),
     );
   }
