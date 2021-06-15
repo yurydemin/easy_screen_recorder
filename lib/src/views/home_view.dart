@@ -1,4 +1,7 @@
+import 'dart:io';
+
 import 'package:circular_countdown_timer/circular_countdown_timer.dart';
+import 'package:easy_screen_recorder/src/views/trimmer_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screen_recording/flutter_screen_recording.dart';
 import 'package:open_file/open_file.dart';
@@ -97,9 +100,19 @@ class _HomeViewState extends State<HomeView> {
     setState(() {
       recording = !recording;
     });
-    print("Opening video");
+    print("Open result video with trimmer");
     print(path);
-    OpenFile.open(path);
+    //OpenFile.open(path);
+    if (path.isNotEmpty) {
+      File file = File(path);
+      Navigator.of(context).push(
+        MaterialPageRoute(builder: (context) {
+          return TrimmerView(file);
+        }),
+      );
+    } else {
+      print('VideoSaver failed');
+    }
   }
 
   Widget onStartRecordingTimer(

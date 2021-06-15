@@ -30,6 +30,7 @@ dependencies:
   open_file:
   quiver:
   circular_countdown_timer: ^0.2.0
+  video_trimmer: ^0.5.1
 
 
   # The following adds the Cupertino Icons font to your application.
