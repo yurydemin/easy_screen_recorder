@@ -17,7 +17,7 @@ class _HomeViewState extends State<HomeView> {
   bool recording = false;
 
   CountDownController _recordingTimerController = CountDownController();
-  int _duration = 3;
+  int _duration = 4;
 
   requestPermissions() async {
     Map<Permission, PermissionStatus> statuses = await [
@@ -44,28 +44,41 @@ class _HomeViewState extends State<HomeView> {
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
+          onStartRecordingTimer(
+            _duration,
+            _recordingTimerController,
+            () {
+              print('TIMER STARTED');
+            },
+            () {
+              print('TIMER COMPLETED');
+              startScreenRecord(false);
+            },
+          ),
           !recording
-              ? onStartRecording
-                  ? onStartRecordingTimer(
-                      _duration,
-                      _recordingTimerController,
-                      () {
-                        print('TIMER STARTED');
-                      },
-                      () {
-                        print('TIMER COMPLETED');
-                        startScreenRecord(false);
-                      },
-                    )
-                  : Center(
-                      child: ElevatedButton(
-                        child: Text('Record screen'),
-                        onPressed: () => setState(() {
-                          onStartRecording = !onStartRecording;
-                          _recordingTimerController.start();
-                        }),
-                      ),
-                    )
+              ?
+              // ? onStartRecording
+              //     ? onStartRecordingTimer(
+              //         _duration,
+              //         _recordingTimerController,
+              //         () {
+              //           print('TIMER STARTED');
+              //         },
+              //         () {
+              //           print('TIMER COMPLETED');
+              //           startScreenRecord(false);
+              //         },
+              //       )
+              //     :
+              Center(
+                  child: ElevatedButton(
+                    child: Text('Record screen'),
+                    onPressed: () => setState(() {
+                      onStartRecording = !onStartRecording;
+                      _recordingTimerController.start();
+                    }),
+                  ),
+                )
               : Center(
                   child: ElevatedButton(
                     child: Text("Stop"),
