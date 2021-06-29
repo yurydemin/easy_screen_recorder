@@ -4,7 +4,6 @@ import 'package:circular_countdown_timer/circular_countdown_timer.dart';
 import 'package:easy_screen_recorder/src/views/trimmer_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screen_recording/flutter_screen_recording.dart';
-import 'package:open_file/open_file.dart';
 import 'package:permission_handler/permission_handler.dart';
 
 class HomeView extends StatefulWidget {
@@ -44,41 +43,28 @@ class _HomeViewState extends State<HomeView> {
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
-          onStartRecordingTimer(
-            _duration,
-            _recordingTimerController,
-            () {
-              print('TIMER STARTED');
-            },
-            () {
-              print('TIMER COMPLETED');
-              startScreenRecord(false);
-            },
-          ),
           !recording
-              ?
-              // ? onStartRecording
-              //     ? onStartRecordingTimer(
-              //         _duration,
-              //         _recordingTimerController,
-              //         () {
-              //           print('TIMER STARTED');
-              //         },
-              //         () {
-              //           print('TIMER COMPLETED');
-              //           startScreenRecord(false);
-              //         },
-              //       )
-              //     :
-              Center(
-                  child: ElevatedButton(
-                    child: Text('Record screen'),
-                    onPressed: () => setState(() {
-                      onStartRecording = !onStartRecording;
-                      _recordingTimerController.start();
-                    }),
-                  ),
-                )
+              ? onStartRecording
+                  ? onStartRecordingTimer(
+                      _duration,
+                      _recordingTimerController,
+                      () {
+                        print('Timer has started');
+                      },
+                      () {
+                        print('Timer has finished');
+                        startScreenRecord(false);
+                      },
+                    )
+                  : Center(
+                      child: ElevatedButton(
+                        child: Text('Record screen'),
+                        onPressed: () => setState(() {
+                          onStartRecording = !onStartRecording;
+                          _recordingTimerController.start();
+                        }),
+                      ),
+                    )
               : Center(
                   child: ElevatedButton(
                     child: Text("Stop"),
@@ -96,8 +82,8 @@ class _HomeViewState extends State<HomeView> {
 
     start = await FlutterScreenRecording.startRecordScreen(
         DateTime.now().toIso8601String(),
-        titleNotification: "STARTED",
-        messageNotification: "MESSAGE",
+        titleNotification: "ESC has began!",
+        messageNotification: "recording...",
         iconNotification: "ic_stat_hot_tub");
 
     setState(() {
@@ -114,8 +100,6 @@ class _HomeViewState extends State<HomeView> {
       recording = !recording;
     });
     print("Open result video with trimmer");
-    print(path);
-    //OpenFile.open(path);
     if (path.isNotEmpty) {
       File file = File(path);
       Navigator.of(context).push(
@@ -192,7 +176,7 @@ class _HomeViewState extends State<HomeView> {
       isTimerTextShown: true,
 
       // Handles the timer start.
-      autoStart: false,
+      autoStart: true,
 
       // This Callback will execute when the Countdown Starts.
       onStart: onStart,

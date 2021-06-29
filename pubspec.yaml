@@ -27,7 +27,6 @@ dependencies:
     git:
       url: https://github.com/yurydemin/flutter_screen_recording.git
   permission_handler:
-  open_file:
   quiver:
   circular_countdown_timer: ^0.2.0
   video_trimmer: ^0.5.1
