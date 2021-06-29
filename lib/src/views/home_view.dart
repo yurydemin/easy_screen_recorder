@@ -61,7 +61,6 @@ class _HomeViewState extends State<HomeView> {
                         child: Text('Record screen'),
                         onPressed: () => setState(() {
                           onStartRecording = !onStartRecording;
-                          _recordingTimerController.start();
                         }),
                       ),
                     )
